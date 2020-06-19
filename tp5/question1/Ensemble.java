@@ -1,6 +1,7 @@
 package question1;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class Ensemble<T> extends AbstractSet<T> {
 
@@ -15,33 +16,49 @@ public class Ensemble<T> extends AbstractSet<T> {
 	}
 
 	public boolean add(T t) {
-		// à compléter pour la question1-1
+		if(!table.contains(t))
+		{
+			table.add(t);
+			return true;
+		}
 
 		return false;
 	}
 
 	public Ensemble<T> union(Ensemble<? extends T> e) {
-		// à compléter pour la question1-2
+		Ensemble<T> res = new Ensemble<T>();
+		res.table.addAll(this.table);
 
-		return null;
+		res.table.removeAll(e.table);
+		res.table.addAll(e.table);
+		return res;
+
 	}
 
 	public Ensemble<T> inter(Ensemble<? extends T> e) {
-		// à compléter pour la question1-2
-
-		return null;
+		Ensemble<T> res = new Ensemble<T>();
+		res.table = this.table;
+		res.table.retainAll(e.table);
+		return res;
 	}
 
 	public Ensemble<T> diff(Ensemble<? extends T> e) {
-		// à compléter pour la question1-2
+		Ensemble <T> res = new Ensemble<T>();
+		res.table = this.table;
 
-		return null;
+		res.table.removeAll(e.table);
+		return res;
 	}
 
 	Ensemble<T> diffSym(Ensemble<? extends T> e) {
-		// à compléter pour la question1-2
+		Ensemble<T> union = this.union(e);
+		Ensemble<T> intersection = this.inter(e);
 
-		return null;
+		Ensemble<T> res = union.diff(intersection);
+		return res;
+
 	}
+	
+	
 	
 }
