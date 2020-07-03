@@ -37,15 +37,14 @@ public class Ensemble<T> extends AbstractSet<T> {
 
 	public Ensemble<T> inter(Ensemble<? extends T> e) {
 		Ensemble<T> res = new Ensemble<T>();
-		res.table = this.table;
+		res.table.addAll(this.table);
 		res.table.retainAll(e.table);
 		return res;
 	}
 
 	public Ensemble<T> diff(Ensemble<? extends T> e) {
 		Ensemble <T> res = new Ensemble<T>();
-		res.table = this.table;
-
+		res.table.addAll(this.table);
 		res.table.removeAll(e.table);
 		return res;
 	}
